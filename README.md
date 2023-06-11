@@ -2,6 +2,11 @@
 
 DocuMate is your friendly AI assistant that can devour large amounts of documents and answer your question (using that data as a context) to enhance your document work experience and not take your job (for now). We plan to implement it using TypeScript as the main language and React as the UI library. The key feature is to integrate with OpenAI language model and Pinecone vector database to introduce long-term memory.
 
+## Project goals
+
+This is two days Global Innovation Day hackathon project. The main goal is to build a prototype that can be used to demonstrate the idea of introducing context long-term memory to AI language models.
+MWP should include uploading pdf documents, processing the text context of those documents, and being able to get answers from user prompts from the document context.
+
 ## Getting Started
 
 First, run the development server:
