@@ -3,7 +3,7 @@ import ChatRoom from './features/ChatRoom'
 
 export default function Home() {
   return (
-    <main className='flex flex-row justify-between'>
+    <main className='flex flex-row justify-between grow'>
       <FileUpload />
       <ChatRoom />
     </main>
