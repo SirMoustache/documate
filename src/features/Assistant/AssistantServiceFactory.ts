@@ -3,7 +3,11 @@ import { ConversationalRetrievalQAChain } from 'langchain/chains';
 import { PromptTemplate } from 'langchain/prompts';
 import { BufferMemory } from 'langchain/memory';
 
-import { VectorStore } from '../VectorStore';
+import {
+  VectorStore,
+  trainVectorStore,
+  resetVectorStore,
+} from '../VectorStore';
 
 import { AssistantMessage, PromptMessage } from './types';
 import { assertIsValidRawAssistantMessage } from './AssistantMessageValidator';
@@ -20,9 +24,12 @@ import {
   OPEN_AI_API_KEY,
   OUTPUT_KEY,
 } from './config';
+import { Document, DocumentSchema } from '@docu/shared/DocumentLoader';
 
 export type AssistantService = {
   getAnswer: (message: PromptMessage) => Promise<AssistantMessage>;
+  train: (documents: Document<DocumentSchema>[]) => Promise<void>;
+  reset: () => Promise<{}>;
 };
 
 const CONDENSE_PROMPT = `Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
@@ -109,5 +116,13 @@ export const makeAssistantService = async (
     return makeResponseMessage({ text, retrievedFromContext: true });
   };
 
-  return { getAnswer };
+  const train = async (documents: Document<DocumentSchema>[]) => {
+    await trainVectorStore(documents);
+  };
+
+  const reset = async () => {
+    return await resetVectorStore();
+  };
+
+  return { getAnswer, train, reset };
 };
