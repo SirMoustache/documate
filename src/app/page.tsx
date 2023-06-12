@@ -1,9 +1,11 @@
-import Image from 'next/image'
+import FileUpload from './features/FileUpload'
+import ChatRoom from './features/ChatRoom'
 
 export default function Home() {
   return (
-    <main>
-      Main
+    <main className='flex flex-row justify-between'>
+      <FileUpload />
+      <ChatRoom />
     </main>
   )
 }
