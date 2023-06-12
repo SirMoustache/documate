@@ -1,5 +1,5 @@
-import FileUpload from './features/FileUpload'
-import ChatRoom from './features/ChatRoom'
+import FileUpload from '../features/FileUpload'
+import ChatRoom from '../features/ChatRoom'
 
 export default function Home() {
   return (
