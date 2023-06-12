@@ -1,7 +1,5 @@
-import { PineconeClient } from '@pinecone-database/pinecone';
+import { VectorStore } from './types';
 
-import { VectorStoreClient, VectorStore } from './types';
-import { PINECONE_API_KEY, PINECONE_ENVIRONMENT } from './config';
 import { makeVectorStoreClient } from './VectorStoreClientFactory';
 import { makeVectorStore } from './VectorStoreFactory';
 
