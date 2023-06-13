@@ -1,6 +1,6 @@
 "use client"; // Make 'FileUpload' a Client component
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import ChatMessage from './ChatMessage'
 
@@ -18,10 +18,22 @@ export type HistoryItem = {
     type: MessageType;
 }
 
+const welcomeMessage = { text: 'Hi! How can I help you?', type: 'robot' } as HistoryItem
+
 export default function ChatRoom() {
     const [prompt, setPrompt] = useState<PromptMessage>({ question: '' })
     const [history, setHistory] = useState<HistoryItem[]>([])
     const [isFetching, setIsFetching] = useState(false)
+
+    useEffect(function () {
+        const timeout = setTimeout(function () {
+            setHistory([...history, welcomeMessage])
+        }, 1500)
+
+        return function () {
+            clearTimeout(timeout)
+        }
+    }, [history])
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPrompt({ question: event.target.value });
@@ -65,7 +77,7 @@ export default function ChatRoom() {
                     return (<ChatMessage {...message} key={message.text} />)
                 })}
             </div>
-            <div className="py-5 relative">
+            <div className="py-5 relative" style={{ opacity: isFetching ? '0.3' : '1' }}>
                 <form onSubmit={handleSubmit}>
                     <input
                         className="w-full bg-gray-200 py-5 px-3 rounded-xl"
