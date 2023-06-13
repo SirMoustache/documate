@@ -2,6 +2,18 @@
 
 import React, { useCallback, useState } from "react"
 
+export type NotificationType = 'success' | 'error'
+
+export type NotificationProps = {
+    text: string;
+    type: NotificationType;
+}
+
+const notificationClassMap = {
+    success: 'text-green-600',
+    error: 'text-red-600'
+}
+
 export const clientRequest = (formData: FormData) => {
     return fetch("/api/docs/devour", {
         method: "POST",
@@ -23,6 +35,7 @@ export default function FileUpload() {
     const [files, setFiles] = useState<File[] | null>()
     const [isUploading, setIsUploading] = useState(false)
     const [error, setError] = useState<any>(null)
+    const [notification, setNotification] = useState<NotificationProps | null>(null)
 
     const handleSelectFiles = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const fileList = e.target.files
@@ -56,11 +69,13 @@ export default function FileUpload() {
                 setIsUploading(false)
                 setError(null)
                 setFiles([])
+                setNotification({ text: 'Files were uploaded successfully', type: 'success' })
                 console.log(`Files successfully uploaded. Response is:`, data);
             },
             error => {
                 setIsUploading(false)
                 setError(error)
+                setNotification({ text: 'Error uploading files', type: 'error' })
                 console.warn(`Error uploading files. ${error}`);
             }
         )
@@ -83,6 +98,7 @@ export default function FileUpload() {
             <button
                 type="button"
                 disabled={isUploading}
+                onClick={() => setNotification(null)}
                 style={{ opacity: isUploading ? '0.5' : '1' }}
                 className="inline-flex items-center justify-center rounded-lg px-4 py-3 mb-5 transition duration-500 ease-in-out text-white bg-slate-500 hover:bg-slate-400 focus:outline-none relative overflow-hidden"
             >
@@ -97,6 +113,9 @@ export default function FileUpload() {
             </button>
 
             <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Files selected:</h2>
+
+            {notification && <div className={notificationClassMap[notification.type]}>{notification.text}</div>}
+
             {files && files.length > 0 ? <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 text-sm">
                 {files.map((file: File) => (
                     <li key={file.name}>{file.name}</li>
