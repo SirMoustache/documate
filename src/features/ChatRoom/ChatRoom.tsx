@@ -33,7 +33,7 @@ export default function ChatRoom() {
         return function () {
             clearTimeout(timeout)
         }
-    }, [history])
+    }, [])
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPrompt({ question: event.target.value });
