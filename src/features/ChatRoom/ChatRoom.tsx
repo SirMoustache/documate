@@ -13,7 +13,7 @@ export default function ChatRoom() {
                     <Image
                         src="/icon-avatar.svg"
                         className="object-cover h-8 w-8 rounded-full bg-gray-300"
-                        alt=""
+                        alt="Avatar icon"
                         width={32}
                         height={32}
                     />
@@ -22,7 +22,7 @@ export default function ChatRoom() {
                     <Image
                         src="/icon-robot.svg"
                         className="object-cover h-8 w-8 rounded-full bg-gray-300"
-                        alt=""
+                        alt="Robot icon"
                         width={32}
                         height={32}
                     />
@@ -54,7 +54,7 @@ export default function ChatRoom() {
                     <Image
                         src="/icon-avatar.svg"
                         className="object-cover h-8 w-8 rounded-full bg-gray-300"
-                        alt=""
+                        alt="Avatar icon"
                         width={32}
                         height={32}
                     />
@@ -63,7 +63,7 @@ export default function ChatRoom() {
                     <Image
                         src="/icon-robot.svg"
                         className="object-cover h-8 w-8 rounded-full bg-gray-300"
-                        alt=""
+                        alt="Robot icon"
                         width={32}
                         height={32}
                     />
