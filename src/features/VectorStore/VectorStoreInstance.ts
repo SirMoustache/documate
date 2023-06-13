@@ -1,7 +1,7 @@
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
 
-import { Document, DocumentSchema } from '@docu/shared/DocumentLoader';
+import { RawDocument } from '@docu/shared/DocumentLoader';
 
 import { VectorStore } from './types';
 import { makeVectorStore } from './VectorStoreFactory';
@@ -28,7 +28,7 @@ export const getVectorStore = async (): Promise<VectorStore> => {
  * Embedding document to existing index
  */
 export const trainVectorStore = async (
-  documents: Document<DocumentSchema>[],
+  documents: RawDocument[],
 ): Promise<VectorStore> => {
   const vectorStoreClient = await getVectorStoreClient();
 
