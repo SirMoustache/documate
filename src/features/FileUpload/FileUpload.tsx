@@ -11,8 +11,8 @@ export const clientRequest = (formData: FormData) => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok.`)
             }
-            const { data } = await response.json()
-            return data;
+            const data = await response.json()
+            return data.docs;
         })
         .catch((err) => {
             console.log(`Error uploading.`);
